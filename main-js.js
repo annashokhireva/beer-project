@@ -1,6 +1,7 @@
 const searchParams = new URLSearchParams(window.location.search);
 const randomCard = document.querySelector('.random-card');
-const randomBtn = document.querySelector('button.random-btn')
+const randomBtn = document.querySelector('button.random-btn');
+const searchBtn = document.querySelector('button.search-btn');
 const api = 'https://api.punkapi.com/v2/beers';
 
 
@@ -47,4 +48,12 @@ function getRandomBeer(beer){
 
     h2Tag.textContent = beer.name;
     randomCard.appendChild(h2Tag);  
+}
+
+searchBtn.addEventListener('click', onSearchClicked);
+
+function onSearchClicked(e) {
+    
+    const url = 'search.html';
+    document.location.href = url;
 }

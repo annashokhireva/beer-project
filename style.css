@@ -36,3 +36,7 @@ button {
 .search-glass:hover {
     opacity: 50%;
 }
+
+.hidden {
+    display: none;
+}

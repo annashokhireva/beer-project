@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="search.js" defer></script>
     <title>Beer project</title>
 </head>
+
 <body>
     <form>
         <label for="beer-name"></label>
         <input type="text" name="beer-name">
         <input type="submit" value="search">
     </form>
-    <ul>
-        list svar
-    </ul>
+    <div>
+
+        <section>
+            <div class="beer-list">
+            </div>
+            <div class="count-buttons hidden">
+                <button class="prev-page">&#9665</button>
+                <div class="counter"></div>
+                <button class="next-page">&#9655</button>
+            </div>
+        </section>
 </body>
+
 </html>
