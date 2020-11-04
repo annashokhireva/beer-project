@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60em;
+}
+
+.random-card {
+    min-height: 20em;
+    width: fit-content;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    width: 20em;
+    height: 10em;
+    margin: 5%;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dices:hover {
+    opacity: 50%;
+}
+
+.search-glass:hover {
+    opacity: 50%;
+}
