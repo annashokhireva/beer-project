@@ -49,17 +49,20 @@ function getRandomBeer(beer){
     randomCard.appendChild(h2Tag);
     
     randomCard.addEventListener('click', function() {
-        const contModal = document.querySelector('.modal-contents')
+
+        const contModal = document.querySelector('.modalcontents')
         const modalBeer = document.querySelector('.bg-modal')
         const modalClose = document.querySelector('.close')
 
         modalBeer.style.display = "flex";
         modalClose.addEventListener("click", function(){
             modalBeer.style.display = "none";
+            removeAllChildNodes(contModal);
         })
+        
         const test = "string"
-        const h2Tag = document.createElement('test');
-        const h2Node = document.createTextNode(str);
+        const h2Tag = document.createElement('h2');
+        const h2Node = document.createTextNode(test);
         h2Tag.appendChild(h2Node);
         contModal.appendChild(h2Tag);
 
