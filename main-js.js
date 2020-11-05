@@ -22,7 +22,6 @@ function getData(url) {
         beer = data[0];
 
         getRandomBeer(beer);
-        
     })
     .catch(error => console.log(error));
 }
@@ -47,7 +46,24 @@ function getRandomBeer(beer){
     randomCard.appendChild(beerImg);
 
     h2Tag.textContent = beer.name;
-    randomCard.appendChild(h2Tag);  
+    randomCard.appendChild(h2Tag);
+    
+    randomCard.addEventListener('click', function() {
+        const contModal = document.querySelector('.modal-contents')
+        const modalBeer = document.querySelector('.bg-modal')
+        const modalClose = document.querySelector('.close')
+
+        modalBeer.style.display = "flex";
+        modalClose.addEventListener("click", function(){
+            modalBeer.style.display = "none";
+        })
+        const test = "string"
+        const h2Tag = document.createElement('test');
+        const h2Node = document.createTextNode(str);
+        h2Tag.appendChild(h2Node);
+        contModal.appendChild(h2Tag);
+
+    })
 }
 
 searchBtn.addEventListener('click', onSearchClicked);
