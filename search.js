@@ -30,22 +30,26 @@ function onSubmit(e) {
 
   prevBtn.addEventListener('click', function () {
 
-    number--;
-    let url = `${api}?beer_name=${searchStr}&page=${number-1}&per_page=10`;
-    
-    getData(url,render);
-    
-    removeAllChildNodes(beerList);
+    if (number > 1) {
+      number--;
+      let url = `${api}?beer_name=${searchStr}&page=${number}&per_page=10`;
+
+      getData(url, render);
+
+      removeAllChildNodes(beerList);
+    }
   });
 
   nextBtn.addEventListener('click', function () {
 
-    number++;
-    let url = `${api}?beer_name=${searchStr}&page=${number}&per_page=10`;
-    
-    getData(url,render);
-    
-    removeAllChildNodes(beerList);
+    //if (???) {
+      number++;
+      let url = `${api}?beer_name=${searchStr}&page=${number}&per_page=10`;
+
+      getData(url, render);
+
+      removeAllChildNodes(beerList);
+   // }
   });
 }
 
