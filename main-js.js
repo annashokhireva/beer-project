@@ -38,7 +38,7 @@ function onClick(beer) {
 }
 
 function getRandomBeer(beer){
-    let h2Tag = document.createElement('h2');
+    h2Tag = document.createElement('h2');
 
     beerImg = new Image (54.4, 212.2);
     beerImg.src = beer.image_url;
@@ -48,26 +48,62 @@ function getRandomBeer(beer){
     h2Tag.textContent = beer.name;
     randomCard.appendChild(h2Tag);
     
-    randomCard.addEventListener('click', function() {
-
-        const contModal = document.querySelector('.modalcontents')
-        const modalBeer = document.querySelector('.bg-modal')
-        const modalClose = document.querySelector('.close')
-
-        modalBeer.style.display = "flex";
-        modalClose.addEventListener("click", function(){
-            modalBeer.style.display = "none";
-            removeAllChildNodes(contModal);
-        })
-        
-        const test = "string"
-        const h2Tag = document.createElement('h2');
-        const h2Node = document.createTextNode(test);
-        h2Tag.appendChild(h2Node);
-        contModal.appendChild(h2Tag);
-
-    })
 }
+
+//modal start
+randomCard.addEventListener('click', popUp);
+    
+const divModal = document.querySelector('.divModal')
+const modalBeer = document.querySelector('.bg-modal')
+const modalClose = document.querySelector('.close')
+                
+function popUp(randomCard) {
+    removeAllChildNodes(divModal);
+                        
+    modalBeer.style.display = "flex";
+    modalClose.addEventListener("click", function(){
+        modalBeer.style.display = "none";
+    })
+    
+    const beerABV = beer.abv
+    const beerVol = beer.volume
+    const beerIngredients = beer.ingredients
+    const beerHops = beer.hops
+    const beerPairing = beer.food_pairing
+    const beerTips = beer.brewers_tips
+
+    const pAbv = document.createElement('p');
+    const pVol = document.createElement('p');
+    const pInred = document.createElement('p')
+    const pHops = document.createElement('p')
+    const pPair = document.createElement('p');
+    const pTips = document.createElement('p');
+
+    const pAbvNode = document.createTextNode(beerABV)
+    const pVolNode = document.createTextNode(beerVol)
+    const pInredNode = document.createTextNode(beerIngredients)
+    const pHopsNode = document.createTextNode(beerHops)
+    const pPairNode = document.createTextNode(beerPairing);
+    const pTipsNode = document.createTextNode(beerTips)
+
+    pAbv.appendChild(pAbvNode);
+    pVol.appendChild(pVolNode);
+    pInred.appendChild(pInredNode)
+    pHops.appendChild(pHopsNode)
+    pPair.appendChild(pPairNode);
+    pTips.appendChild(pTipsNode);
+
+    divModal.appendChild(beerImg);
+    divModal.appendChild(h2Tag)
+    divModal.appendChild(pAbv)
+    divModal.appendChild(pVol)
+    divModal.appendChild(pInred)
+    divModal.appendChild(pHops)
+    divModal.appendChild(pPair)
+    divModal.appendChild(pTips)
+}   //modal End
+
+
 
 searchBtn.addEventListener('click', onSearchClicked);
 
