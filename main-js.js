@@ -46,8 +46,7 @@ function getRandomBeer(beer){
     randomCard.appendChild(beerImg);
 
     h2Tag.textContent = beer.name;
-    randomCard.appendChild(h2Tag);
-    
+    randomCard.appendChild(h2Tag);   
 }
 
 //modal start
@@ -101,6 +100,8 @@ function popUp(randomCard) {
     divModal.appendChild(pHops)
     divModal.appendChild(pPair)
     divModal.appendChild(pTips)
+
+    getRandomBeer(beer) //kommer ihåg vilket randomCard det var på sidan
 }   //modal End
 
 
