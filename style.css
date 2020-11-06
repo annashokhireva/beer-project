@@ -20,7 +20,8 @@ main {
     justify-content: center;
 }
 
-button {
+.random-btn,
+.search-btn {
     width: 20em;
     height: 10em;
     margin: 5%;
@@ -37,9 +38,28 @@ button {
     opacity: 50%;
 }
 
+/* Beer List and buttons */
+
 .hidden {
     display: none;
 }
+
+.search-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5%;
+}
+
+.prev-page,
+.next-page {
+    width: 5em;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Beer Info */
 
 .bg-modal {
 	background-color: rgba(0, 0, 0, 0.8);
