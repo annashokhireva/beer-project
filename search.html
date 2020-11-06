@@ -10,37 +10,46 @@
 </head>
 
 <body>
-    <form>
-        <div class="key-word-search">
-            <label for="beer-name">Name</label>
-            <input type="text" name="beer-name">
-            <label for="hops">Hops</label>
-            <input type="text" name="hops">
-            <label for="malt">Malt</label>
-            <input type="text" name="malt">
-        </div>
-        <div class="price-slider">
-            <span> ABV from
-                <input type="number" value="0" min="0" max="67" /> to
-                <input type="number" value="67" min="0" max="67" />
-            </span>
-            <input value="1" min="0" max="67" step="5" type="range" />
-            <input value="67" min="0" max="67" step="5" type="range" />
-        </div>
-        <div class="date-ranger">
-            <label for="start-date">Date range</label>
-            <input type="month" class="start-date" name="start-date" min="2007-01" value="2020-11"/>
-        </div>
-        <input type="submit" value="search">
-    </form>
+    <header>
+        <div class="tooltip">
+            <img class="dices go-back" src="/img/dices.png" width="120em" alt="dices"> 
+            <span class="tooltip-text">Go back to random page</span> 
+        </div> <!--har laggt till en "Go-Back" image/button -->
+        
+        <form>
+            <div class="key-word-search">
+                <label for="beer-name">Name</label>
+                <input type="text" name="beer-name">
+                <label for="hops">Hops</label>
+                <input type="text" name="hops">
+                <label for="malt">Malt</label>
+                <input type="text" name="malt">
+            </div>
+            <div class="price-slider">
+                <span> ABV from
+                    <input type="number" value="0" min="0" max="67" /> to
+                    <input type="number" value="67" min="0" max="67" />
+                </span>
+                <input value="1" min="0" max="67" step="5" type="range" />
+                <input value="67" min="0" max="67" step="5" type="range" />
+            </div>
+            <div class="date-ranger">
+                <label for="start-date">Date range</label>
+                <input type="month" class="start-date" name="start-date" min="2007-01" value="2020-11" />
+            </div>
+            <input type="submit" value="search">
+        </form>
+    </header>
+
     <div>
 
         <section class="search-div">
             <div class="prev-btn hidden">
                 <button class="prev-page">&#9665</button>
             </div>
-            <div class="beer-list">
-            </div>
+
+            <div class="beer-list"></div>
+
             <div class="next-btn hidden">
                 <button class="next-page">&#9655</button>
             </div>

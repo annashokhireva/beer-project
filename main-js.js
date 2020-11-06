@@ -101,15 +101,16 @@ function popUp(randomCard) {
     divModal.appendChild(pPair)
     divModal.appendChild(pTips)
 
-    getRandomBeer(beer) //kommer ihåg vilket randomCard det var på sidan
+    getRandomBeer(beer); //kommer ihåg vilket randomCard det var på sidan
 }   //modal End
 
 
 
 searchBtn.addEventListener('click', onSearchClicked);
 
-function onSearchClicked(e) {
+function onSearchClicked() {
     
     const url = 'search.html';
     document.location.href = url;
 }
+

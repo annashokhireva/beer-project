@@ -3,6 +3,7 @@ const formElement = document.querySelector('form');
 const beerList = document.querySelector('div.beer-list');
 const prevBtn = document.querySelector('div.prev-btn');
 const nextBtn = document.querySelector('div.next-btn');
+const goBack = document.querySelector('.go-back');
 
 let beers = [];
 let number = 1;
@@ -71,7 +72,7 @@ function render(beers) {
 
   const ulElement = document.createElement('ul');
 
-  //ulElement.addEventListener('click');
+  ulElement.addEventListener('click', onUlClicked);
 
   for (let i = 0; i < beers.length; i++) {
 
@@ -144,3 +145,16 @@ function abvRanger() {
 }
 
 abvRanger();
+
+goBack.addEventListener('click', onDiceClicked);
+
+function onDiceClicked() {
+    
+    const url = 'index.html';
+    document.location.href = url;
+}
+
+function onUlClicked(e) {
+    
+  alert('hej :)');
+}

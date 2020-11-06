@@ -59,6 +59,10 @@ main {
     cursor: pointer;
 }
 
+.beer-list li:hover {
+    cursor: pointer;
+}
+
 /* Beer Info */
 
 .bg-modal {
@@ -89,8 +93,49 @@ main {
 	font-size: 42px;
 	color: #333;
 	transform: rotate(45deg);
-  cursor: pointer;
+    cursor: pointer;
 }
+
+/* Search-page header */
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.go-back {
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: fit-content;
+    background-color: rgb(217, 217, 235);
+    color: rgb(43, 43, 43);
+    font-size: 15px;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    margin: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
 
 
 /* Input, ranger & calender styling */
