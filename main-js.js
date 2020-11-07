@@ -29,7 +29,7 @@ function getData(url) {
 randomBtn.addEventListener('click', onClick);
 
 function onClick(beer) {
-
+    removeAllChildNodes(beerInfoDiv);
     removeAllChildNodes(randomCard);
     const url = `${api}/random`;
     
@@ -49,60 +49,78 @@ function getRandomBeer(beer){
     randomCard.appendChild(h2Tag);   
 }
 
-//modal start
-randomCard.addEventListener('click', popUp);
+//Beer Info start
+randomCard.addEventListener('click', beerInfo);
     
-const divModal = document.querySelector('.divModal')
-const modalBeer = document.querySelector('.bg-modal')
-const modalClose = document.querySelector('.close')
+const beerInfoDiv = document.querySelector('div.beer-info');
                 
-function popUp(randomCard) {
-    removeAllChildNodes(divModal);
-                        
-    modalBeer.style.display = "flex";
-    modalClose.addEventListener("click", function(){
-        modalBeer.style.display = "none";
-    })
+function beerInfo() {
+    removeAllChildNodes(beerInfoDiv);
     
-    const beerABV = beer.abv
-    const beerVol = beer.volume
-    const beerIngredients = beer.ingredients
-    const beerHops = beer.hops
-    const beerPairing = beer.food_pairing
-    const beerTips = beer.brewers_tips
+    let description = [
+        `${beer.description}`,
+        `Volume: ${beer.volume.value} ${beer.volume.unit}`,
+        `Alcohol by volume: ${beer.abv}`,
+        `Food pairing: ${beer.food_pairing}`,
+        `Brewers tips: ${beer.brewers_tips}`
+    ];
 
-    const pAbv = document.createElement('p');
-    const pVol = document.createElement('p');
-    const pInred = document.createElement('p')
-    const pHops = document.createElement('p')
-    const pPair = document.createElement('p');
-    const pTips = document.createElement('p');
 
-    const pAbvNode = document.createTextNode(beerABV)
-    const pVolNode = document.createTextNode(beerVol)
-    const pInredNode = document.createTextNode(beerIngredients)
-    const pHopsNode = document.createTextNode(beerHops)
-    const pPairNode = document.createTextNode(beerPairing);
-    const pTipsNode = document.createTextNode(beerTips)
+    text = '<dl>';
 
-    pAbv.appendChild(pAbvNode);
-    pVol.appendChild(pVolNode);
-    pInred.appendChild(pInredNode)
-    pHops.appendChild(pHopsNode)
-    pPair.appendChild(pPairNode);
-    pTips.appendChild(pTipsNode);
+    for (let i = 0; i < description.length; i++) {
+        const descriptionInfo = description[i];
+        text += '<dt>' + descriptionInfo + '</dt>';
+    };
 
-    divModal.appendChild(beerImg);
-    divModal.appendChild(h2Tag)
-    divModal.appendChild(pAbv)
-    divModal.appendChild(pVol)
-    divModal.appendChild(pInred)
-    divModal.appendChild(pHops)
-    divModal.appendChild(pPair)
-    divModal.appendChild(pTips)
+    text += '</dl>';
 
+    let malt = beer.ingredients.malt;
+
+    maltText = '<dt> Malt:';
+
+    for (let i = 0; i < malt.length; i++){
+        let maltInfo = malt[i];
+        maltText += `<dd>${maltInfo.name} (${maltInfo.amount.value} 
+            ${maltInfo.amount.unit})</dd>`;
+    }
+
+    maltText += '</dt>'
+
+    let hops = beer.ingredients.hops;
+
+    hopsText = '<dt> Hops:';
+
+    for (let i = 0; i < hops.length; i++){
+        let hopsInfo = hops[i];
+        hopsText += `<dd>${hopsInfo.name} (${hopsInfo.amount.value} 
+            ${hopsInfo.amount.unit}): Add: ${hopsInfo.add} Attribute: ${hopsInfo.attribute}</dd>`;
+    }
+
+    hopsText += '</dt>'
+
+    yeastText = `<dt> Yeast: </dt> <dd>${beer.ingredients.yeast}</dd>`;
+    
+    const descriptionDiv = document.createElement('div');
+    const ingredientsDiv = document.createElement('div');
+    const maltP = document.createElement('p');
+    const hopsP = document.createElement('p');
+    const yeastP = document.createElement('p');
+    
+    beerInfoDiv.appendChild(beerImg);
+    beerInfoDiv.appendChild(h2Tag);
+    beerInfoDiv.appendChild(descriptionDiv);
+    descriptionDiv.innerHTML = text;
+    ingredientsDiv.innerText = 'Ingredients:';
+    descriptionDiv.appendChild(ingredientsDiv);
+    maltP.innerHTML = maltText;
+    ingredientsDiv.appendChild(maltP);
+    hopsP.innerHTML = hopsText;
+    ingredientsDiv.appendChild(hopsP)
+    yeastP.innerHTML = yeastText;
+    ingredientsDiv.appendChild(yeastP);
     getRandomBeer(beer); //kommer ihåg vilket randomCard det var på sidan
-}   //modal End
+}   //beer Info End
 
 
 
