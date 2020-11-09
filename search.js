@@ -1,68 +1,126 @@
-const api = 'https://api.punkapi.com/v2/beers';
 const formElement = document.querySelector('form');
 const beerList = document.querySelector('div.beer-list');
 const prevBtn = document.querySelector('div.prev-btn');
 const nextBtn = document.querySelector('div.next-btn');
 const goBack = document.querySelector('.go-back');
 
+/* Endrat namn från api till apiEndpoint för klarhet */
+const apiEndpoint = 'https://api.punkapi.com/v2/beers';
+const perPage = 10;
+let currentPage = 1;
 let beers = [];
-let number = 1;
 
-formElement.addEventListener('submit', onSubmit);
+/* gömt kod behöver lite arbete för att fungera. Mäste kolla med Niklas */
+// let url = '';
 
-const removeAllChildNodes = (parent) => {
+// if(window.sessionStorage.url) {
+//   url = JSON.parse(window.sessionStorage.url);
+// }
 
-  while (parent.firstChild) {
-
-    parent.removeChild(parent.firstChild);
-  }
+/* cashe start */
+if(window.sessionStorage.beers) {
+  beers = JSON.parse(window.sessionStorage.beers);
 }
 
-function onSubmit(e) {
-  removeAllChildNodes(beerList);
+// function saveUrl(form){
+//   window.sessionStorage.input = JSON.stringify(form);
+// }
 
-  const searchStr = e.target[0].value;
+function saveBeerList(beerData) {
+  window.sessionStorage.beers = JSON.stringify(beerData);
+}
+/* cashe end */
+
+render(beers);
 
 
-  let url = `${api}?beer_name=${searchStr}&page=${number}&per_page=10`;
-
-  getData(url, render);
+formElement.addEventListener('submit', function(e) {
   e.preventDefault();
+  removeAllChildNodes(beerList);
+  getData(render);  
+  nextBtn.classList.remove('hidden');
+});
 
-  prevBtn.addEventListener('click', function () {
 
-    if (number > 1) {
-      number--;
-      let url = `${api}?beer_name=${searchStr}&page=${number}&per_page=10`;
+prevBtn.addEventListener('click', function () {
 
-      getData(url, render);
+  if (currentPage > 1) {
+    currentPage--;
+    
+    getData(render);
 
-      removeAllChildNodes(beerList);
+    removeAllChildNodes(beerList);
+
+    prevBtn.classList.remove('hidden');
+    nextBtn.classList.remove('hidden');  
+  }
+
+  if (currentPage <= 1){
+    prevBtn.classList.add('hidden');
+  }
+});
+
+
+/* Fungerande pagiantion */
+nextBtn.addEventListener('click', function () {
+
+  if (beers.length >= 10) {
+    currentPage++;
+   
+    getData(render);
+
+    removeAllChildNodes(beerList);
+    
+    prevBtn.classList.remove('hidden');
+    nextBtn.classList.remove('hidden');  
+  }
+
+  if (beers.length != 10){
+    nextBtn.classList.add('hidden'); 
+  }
+    
+});
+
+/* hämtar search parametrar från alla input och adderar till url*/
+function getQueryString(form) {
+  let query = new URLSearchParams();
+
+  query.set('per_page', perPage);
+  query.set('page', currentPage);
+
+  let inputField = form.querySelectorAll('input');
+
+  for(input of inputField) {
+    const value = input.value.trim();
+
+    if(value){
+      query.set(input.name, input.value);  
     }
-  });
-
-  nextBtn.addEventListener('click', function () {
-
-    //if (???) {
-      number++;
-      let url = `${api}?beer_name=${searchStr}&page=${number}&per_page=10`;
-
-      getData(url, render);
-
-      removeAllChildNodes(beerList);
-   // }
-  });
+  }
+  //saveUrl(form);
+  return query.toString();
 }
 
 
-function getData(url, callback) {
+function removeAllChildNodes(parent){
+
+    while (parent.firstChild) {
+  
+      parent.removeChild(parent.firstChild);
+    }
+}
+
+
+function getData(callback) {
   prevBtn.classList.add('hidden');
   nextBtn.classList.add('hidden');
+  url = apiEndpoint + '?' + getQueryString(formElement);
 
-  fetch(url)
+  fetch(url, {cache: "force-cache"})
     .then(res => res.json())
-    .then(beers => {
-
+    .then(beerData => {
+      beers = beerData;
+      saveBeerList(beerData); /* Cashar senaste besökt öl listan */
       callback(beers);
     })
     .catch(error => console.log(error));
@@ -83,25 +141,28 @@ function render(beers) {
     liElement.textContent = beer.name;
 
     ulElement.appendChild(liElement);
+    
   }
 
-  beerList.appendChild(ulElement);
-
-  prevBtn.classList.remove('hidden');
-  nextBtn.classList.remove('hidden');
+  beerList.appendChild(ulElement); 
 }
 
-function renderFirstBeer(beers) {
 
-  const firstBeer = beers[0];
 
-  const pElement = document.createElement('p');
+/* varför finns den där funktionen här? Den gör ingeting. Eller?*/
 
-  pElement.textContent = firstBeer.name;
+// function renderFirstBeer(beerData) {
 
-  beerList.appendChild(pElement);
-}
+//   const firstBeer = beerData[0];
 
+//   const pElement = document.createElement('p');
+
+//   pElement.textContent = firstBeer.name;
+
+//   beerList.appendChild(pElement);
+//}
+
+/* Ranger */
 function abvRanger() {
 
   var parent = document.querySelector(".price-slider");
@@ -145,6 +206,7 @@ function abvRanger() {
 }
 
 abvRanger();
+
 
 goBack.addEventListener('click', onDiceClicked);
 
