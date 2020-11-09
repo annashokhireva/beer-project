@@ -191,7 +191,9 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 input[type=number]:invalid,
-input[type=number]:out-of-range {
+input[type=number]:out-of-range,
+input[type=text]:invalid,
+input[type=text]:out-of-range {
     border: 2px solid #e60023;
 }
 
