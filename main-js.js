@@ -4,7 +4,6 @@ const randomBtn = document.querySelector('button.random-btn');
 const searchBtn = document.querySelector('button.search-btn');
 const api = 'https://api.punkapi.com/v2/beers';
 
-
 const removeAllChildNodes = (parent) => {
 
     while (parent.firstChild) {
@@ -13,39 +12,49 @@ const removeAllChildNodes = (parent) => {
     }
 }
 
-function getData(url) {
+function getData(url, callback) {
 
     fetch(url)
     .then(response => response.json())
     .then(data => {
 
-        beer = data[0];
-
-        getRandomBeer(beer);
+        callback(data)
+        //getRandomBeer(beer);
     })
     .catch(error => console.log(error));
 }
 
 randomBtn.addEventListener('click', onClick);
 
+<<<<<<< Updated upstream
 function onClick(beer) {
     removeAllChildNodes(beerInfoDiv);
     removeAllChildNodes(randomCard);
     const url = `${api}/random`;
+=======
+function onClick(evt) {
+
+   removeAllChildNodes(randomCard);
+>>>>>>> Stashed changes
     
-    getData(url);  
+    const url = `${api}/random`;
     
+    getData(url, getRandomBeer); 
+    evt.preventDefault(); 
 }
 
-function getRandomBeer(beer){
+function getRandomBeer(data){       //Skapar upp bild och namn på ranombeer
+    const beer = data[0]
+    
     h2Tag = document.createElement('h2');
 
     beerImg = new Image (54.4, 212.2);
     beerImg.src = beer.image_url;
 
     randomCard.appendChild(beerImg);
-
+    h2Tag.setAttribute('name', beer.id); 
     h2Tag.textContent = beer.name;
+<<<<<<< Updated upstream
     randomCard.appendChild(h2Tag);   
 }
 
@@ -121,8 +130,20 @@ function beerInfo() {
     ingredientsDiv.appendChild(yeastP);
     getRandomBeer(beer); //kommer ihåg vilket randomCard det var på sidan
 }   //beer Info End
+=======
+    
+    randomCard.appendChild(h2Tag);  
+>>>>>>> Stashed changes
 
+    h2Tag.addEventListener('click', beerInfo);
+}
 
+function beerInfo(evt) {
+    
+    const id = evt.target.getAttribute('name');
+    const url = `beerinfo.html?name=${id}`;
+    document.location.href = url;
+}
 
 searchBtn.addEventListener('click', onSearchClicked);
 
