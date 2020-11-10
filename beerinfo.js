@@ -26,9 +26,9 @@ function render(data) {
     //removeAllChildNodes(beerInfoDiv);
     
     let description = [
-        `${beer.description}`,
-        `Volume: ${beer.volume.value} ${beer.volume.unit}`,
-        `Alcohol by volume: ${beer.abv}%`,
+        `${beer.description}<br><br>`,
+        `Volume: ${beer.volume.value} ${beer.volume.unit}<br><br>`,
+        `Alcohol by volume: ${beer.abv}%<br><br>`,
         `Food pairing: ${beer.food_pairing}`,
         `Brewers tips: ${beer.brewers_tips}`
     ];
