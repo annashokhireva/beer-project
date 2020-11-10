@@ -1,3 +1,4 @@
+const searchParams = new URLSearchParams(window.location.search);
 const formElement = document.querySelector('form');
 const beerList = document.querySelector('div.beer-list');
 const prevBtn = document.querySelector('div.prev-btn');
@@ -215,8 +216,10 @@ function onDiceClicked() {
     const url = 'index.html';
     document.location.href = url;
 }
-
+  /* tar en till beerInfo */
 function onUlClicked(e) {
     
-  alert('hej :)');
+  const id = e.target.getAttribute('name');
+  const url = `beerinfo.html?name=${id}`;
+  document.location.href = url;
 }

@@ -19,11 +19,10 @@ function getData(url, callback) {
     .then(data => {
 
         callback(data)
-        //getRandomBeer(beer);
     })
     .catch(error => console.log(error));
 }
-
+/* Random button*/
 randomBtn.addEventListener('click', onClick);
 
 function onClick(evt) {
@@ -41,7 +40,7 @@ function getRandomBeer(data){       //Skapar upp bild och namn på ranombeer
     
     h2Tag = document.createElement('h2');
 
-    beerImg = new Image (54.4, 212.2);
+    beerImg = new Image (54.4);
     beerImg.src = beer.image_url;
 
     randomCard.appendChild(beerImg);
@@ -52,14 +51,14 @@ function getRandomBeer(data){       //Skapar upp bild och namn på ranombeer
 
     h2Tag.addEventListener('click', beerInfo);
 }
-
+/* Tar en till beerinfo*/
 function beerInfo(evt) {
     
     const id = evt.target.getAttribute('name');
     const url = `beerinfo.html?name=${id}`;
     document.location.href = url;
 }
-
+/* Search button*/
 searchBtn.addEventListener('click', onSearchClicked);
 
 function onSearchClicked() {
