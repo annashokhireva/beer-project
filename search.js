@@ -45,6 +45,7 @@ prevBtn.addEventListener('click', function () {
 
         render(beersCash['page' + currentPage]);
       }
+      nextBtn.classList.remove('hidden');
     }
 
     else {
@@ -62,7 +63,6 @@ prevBtn.addEventListener('click', function () {
 
 
 nextBtn.addEventListener('click', function () {
-
   if (beers.length >= 10) {
     currentPage++;
 
@@ -78,11 +78,10 @@ nextBtn.addEventListener('click', function () {
       }
 
       else {
-        getData(render);
-
-        prevBtn.classList.remove('hidden');
-      nextBtn.classList.remove('hidden');  
+        getData(render);    
       }
+      nextBtn.classList.remove('hidden');
+      prevBtn.classList.remove('hidden');
     }
     
     else {
@@ -92,10 +91,6 @@ nextBtn.addEventListener('click', function () {
       nextBtn.classList.remove('hidden');  
     } 
   }
-
-  if (beers.length != 10){
-    nextBtn.classList.add('hidden'); 
-  }   
 });
 
 

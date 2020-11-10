@@ -5,57 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
     <script src="search.js" defer></script>
     <title>Beer Project</title>
 </head>
 
 <body>
-    <header>
-        <div class="tooltip">
-            <img class="dices go-back" src="/img/dices.png" width="120em" alt="dices"> 
-            <span class="tooltip-text">Go back to random page</span> 
-        </div> <!--har laggt till en "Go-Back" image/button -->
-        
-        <form>
-            <div class="key-word-search">
-                <label for="beer_name">Name</label>
-                <input type="text" name="beer_name" placeholder="e.g. Russian Doll">
-                <label for="hops">Hops</label>
-                <input type="text" name="hops" placeholder="e.g. Cascade">
-                <label for="malt">Malt</label>
-                <input type="text" name="malt" placeholder="e.g. Extra Pale">
+    <main class="main-search">
+        <aside>
+            <div class="dice-icon tooltip go-back">
+                <img class="dices" src="/img/dices.png" width="90em" alt="dices">
+                <span class="tooltip-text">Go back to start page</span>
             </div>
-            <div class="abv-slider">
-                <span> ABV from
-                    <input type="number" name="abv_gt" value="0" min="0" max="67" pattern="[0-67]"> to
-                    <input type="number" name="abv_lt" value="67" min="0" max="67" pattern="[0-67]">
-                </span>
-                <input value="1" min="0" max="67" step="1" type="range">
-                <input value="67" min="0" max="67" step="1" type="range">
-            </div>
-            <div class="date-ranger">
-                <label for="brewed_before">Brewed after</label>
-                <input type="text" name="brewed_after" placeholder="MM-YYYY" pattern="[0-9]{2}-[0-9]{4}">
-                <label for="brewed_after">Brewed before</label>
-                <input type="text" name="brewed_before" placeholder="MM-YYYY" pattern="[0-9]{2}-[0-9]{4}">
-            </div>
-            <button type="submit">Search</button>  
-        </form>
-    </header>
 
-    <div>
+            <form>
+                <div class="inputs">
+                    <label for="beer_name">Name</label><br>
+                    <input type="text" name="beer_name" placeholder="e.g. Russian Doll"><br>
+                    <label for="hops">Hops</label><br>
+                    <input type="text" name="hops" placeholder="e.g. Cascade"><br>
+                    <label for="malt">Malt</label><br>
+                    <input type="text" name="malt" placeholder="e.g. Extra Pale"><br>
+                    <label for="brewed_before">Brewed after</label><br>
+                    <input type="text" name="brewed_after" placeholder="MM-YYYY" pattern="[0-9]{2}-[0-9]{4}"><br>
+                    <label for="brewed_after">Brewed before</label><br>
+                    <input type="text" name="brewed_before" placeholder="MM-YYYY" pattern="[0-9]{2}-[0-9]{4}"><br>
+                </div>
+                <div class="abv-slider">
+                    <span> ABV from
+                        <input type="number" name="abv_gt" value="0" min="0" max="67" pattern="[0-67]"> to
+                        <input type="number" name="abv_lt" value="67" min="0" max="67" pattern="[0-67]">
+                    </span>
+                    <input value="1" min="0" max="67" step="1" type="range">
+                    <input value="67" min="0" max="67" step="1" type="range">
+                </div>
+                <button type="submit" class="btn-submit">SEARCH</button>
+            </form>
+        </aside>
 
-        <section class="search-div">
+        <section class="search-section">
             <div class="prev-btn hidden">
-                <button class="prev-page">&#9665</button>
+                <button class="prev-page"><img src="/img/left.png" alt="left" width="20px"></button>
             </div>
 
             <div class="beer-list"></div>
 
             <div class="next-btn hidden">
-                <button class="next-page">&#9655</button>
+                <button class="next-page"><img src="/img/right.png" alt="left" width="20px"></button>
             </div>
         </section>
+    </main>
 </body>
 
 </html>
