@@ -5,34 +5,19 @@ const prevBtn = document.querySelector('div.prev-btn');
 const nextBtn = document.querySelector('div.next-btn');
 const goBack = document.querySelector('.go-back');
 
-/* Endrat namn från api till apiEndpoint för klarhet */
 const apiEndpoint = 'https://api.punkapi.com/v2/beers';
 const perPage = 10;
 let currentPage = 1;
 let beers = [];
+let beersCash = {};
 
-/* gömt kod behöver lite arbete för att fungera. Mäste kolla med Niklas */
-// let url = '';
+sessionStorage.setItem("origin", window.location.href);
 
-// if(window.sessionStorage.url) {
-//   url = JSON.parse(window.sessionStorage.url);
-// }
-
-/* cashe start */
-if(window.sessionStorage.beers) {
-  beers = JSON.parse(window.sessionStorage.beers);
-}
-
-// function saveUrl(form){
-//   window.sessionStorage.input = JSON.stringify(form);
-// }
 
 function saveBeerList(beerData) {
-  window.sessionStorage.beers = JSON.stringify(beerData);
+  beersCash['page' + currentPage] = beerData;
+  window.sessionStorage.beersCash = JSON.stringify(beersCash);
 }
-/* cashe end */
-
-render(beers);
 
 
 formElement.addEventListener('submit', function(e) {
@@ -40,6 +25,7 @@ formElement.addEventListener('submit', function(e) {
   removeAllChildNodes(beerList);
   getData(render);  
   nextBtn.classList.remove('hidden');
+  window.sessionStorage.removeItem('beersCash');
 });
 
 
@@ -48,12 +34,25 @@ prevBtn.addEventListener('click', function () {
   if (currentPage > 1) {
     currentPage--;
     
-    getData(render);
+    if(window.sessionStorage.beersCash){
+      let beersCash = window.sessionStorage.beersCash;
+      
+      beersCash = JSON.parse(beersCash);
+      console.log(beersCash);
 
-    removeAllChildNodes(beerList);
+      if(beersCash['page' + currentPage]){
+      removeAllChildNodes(beerList);
 
-    prevBtn.classList.remove('hidden');
-    nextBtn.classList.remove('hidden');  
+        render(beersCash['page' + currentPage]);
+      }
+    }
+
+    else {
+      getData(render);
+
+      prevBtn.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    }   
   }
 
   if (currentPage <= 1){
@@ -62,27 +61,44 @@ prevBtn.addEventListener('click', function () {
 });
 
 
-/* Fungerande pagiantion */
 nextBtn.addEventListener('click', function () {
 
   if (beers.length >= 10) {
     currentPage++;
-   
-    getData(render);
 
-    removeAllChildNodes(beerList);
+    if(window.sessionStorage.beersCash){
+      let beersCash = window.sessionStorage.beersCash;
+      
+      beersCash = JSON.parse(beersCash);
+      console.log(beersCash);
+      removeAllChildNodes(beerList);
+      if(beersCash['page' + currentPage]){      
+
+        render(beersCash['page' + currentPage]);
+      }
+
+      else {
+        getData(render);
+
+        prevBtn.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');  
+      }
+    }
     
-    prevBtn.classList.remove('hidden');
-    nextBtn.classList.remove('hidden');  
+    else {
+      getData(render);
+
+      prevBtn.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');  
+    } 
   }
 
   if (beers.length != 10){
     nextBtn.classList.add('hidden'); 
-  }
-    
+  }   
 });
 
-/* hämtar search parametrar från alla input och adderar till url*/
+
 function getQueryString(form) {
   let query = new URLSearchParams();
 
@@ -98,7 +114,7 @@ function getQueryString(form) {
       query.set(input.name, input.value);  
     }
   }
-  //saveUrl(form);
+  
   return query.toString();
 }
 
@@ -116,19 +132,19 @@ function getData(callback) {
   prevBtn.classList.add('hidden');
   nextBtn.classList.add('hidden');
   url = apiEndpoint + '?' + getQueryString(formElement);
-
+  console.log(url);
   fetch(url, {cache: "force-cache"})
     .then(res => res.json())
     .then(beerData => {
       beers = beerData;
-      saveBeerList(beerData); /* Cashar senaste besökt öl listan */
+      saveBeerList(beerData); 
       callback(beers);
     })
     .catch(error => console.log(error));
 }
 
-function render(beers) {
 
+function render(beers) {
   const ulElement = document.createElement('ul');
 
   ulElement.addEventListener('click', onUlClicked);
@@ -141,32 +157,16 @@ function render(beers) {
     liElement.setAttribute('name', beer.id);
     liElement.textContent = beer.name;
 
-    ulElement.appendChild(liElement);
-    
+    ulElement.appendChild(liElement); 
   }
 
   beerList.appendChild(ulElement); 
 }
 
 
-
-/* varför finns den där funktionen här? Den gör ingeting. Eller?*/
-
-// function renderFirstBeer(beerData) {
-
-//   const firstBeer = beerData[0];
-
-//   const pElement = document.createElement('p');
-
-//   pElement.textContent = firstBeer.name;
-
-//   beerList.appendChild(pElement);
-//}
-
-/* Ranger */
 function abvRanger() {
 
-  var parent = document.querySelector(".price-slider");
+  var parent = document.querySelector(".abv-slider");
   if (!parent) return;
 
   var
@@ -200,10 +200,8 @@ function abvRanger() {
 
       rangeS[0].value = number1;
       rangeS[1].value = number2;
-
     }
   });
-
 }
 
 abvRanger();
@@ -216,7 +214,8 @@ function onDiceClicked() {
     const url = 'index.html';
     document.location.href = url;
 }
-  /* tar en till beerInfo */
+
+
 function onUlClicked(e) {
     
   const id = e.target.getAttribute('name');

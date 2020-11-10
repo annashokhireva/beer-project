@@ -158,7 +158,7 @@ input {
     margin-left: 1em;
 }
 
-.price-slider {
+.abv-slider {
     width: fit-content;
     margin: 1em;
     text-align: center;
@@ -171,8 +171,8 @@ input {
     align-self: flex-start;
 }
 
-.price-slider svg,
-.price-slider input[type=range] {
+.abv-slider svg,
+.abv-slider input[type=range] {
     position: absolute;
     left: 0;
     bottom: 0;

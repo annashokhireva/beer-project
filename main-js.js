@@ -4,7 +4,33 @@ const randomBtn = document.querySelector('button.random-btn');
 const searchBtn = document.querySelector('button.search-btn');
 const api = 'https://api.punkapi.com/v2/beers';
 
-const removeAllChildNodes = (parent) => {
+
+let randomBeer = [];
+
+if(window.sessionStorage.randomBeer) {
+    randomBeer = JSON.parse(window.sessionStorage.randomBeer);
+  } 
+  
+function saveRandomBeer(randomBeerData) {
+window.sessionStorage.randomBeer = JSON.stringify(randomBeerData);
+}
+
+window.onbeforeunload = function(){
+    sessionStorage.setItem("origin", window.location.href);
+}
+
+window.onload = function(){
+    if(window.location.href === sessionStorage.getItem("origin")){
+        sessionStorage.clear();
+    }
+
+    else {
+        getRandomBeer(randomBeer);
+    }
+}
+
+
+function removeAllChildNodes(parent) {
 
     while (parent.firstChild) {
 
@@ -16,14 +42,16 @@ function getData(url, callback) {
 
     fetch(url)
     .then(response => response.json())
-    .then(data => {
-
-        callback(data)
+    .then(beerData => {
+       
+        callback(beerData);
     })
     .catch(error => console.log(error));
 }
-/* Random button*/
+
+
 randomBtn.addEventListener('click', onClick);
+
 
 function onClick(evt) {
 
@@ -35,8 +63,9 @@ function onClick(evt) {
     evt.preventDefault(); 
 }
 
-function getRandomBeer(data){       //Skapar upp bild och namn på ranombeer
-    const beer = data[0]
+function getRandomBeer(randomBeerData){       //Skapar upp bild och namn på ranombeer
+    if (randomBeerData.length > 0){
+    const beer = randomBeerData[0]
     
     h2Tag = document.createElement('h2');
 
@@ -44,22 +73,27 @@ function getRandomBeer(data){       //Skapar upp bild och namn på ranombeer
     beerImg.src = beer.image_url;
 
     randomCard.appendChild(beerImg);
-    h2Tag.setAttribute('name', beer.id); 
+    randomCard.setAttribute('name', beer.id); 
     h2Tag.textContent = beer.name;
     
     randomCard.appendChild(h2Tag);  
 
-    h2Tag.addEventListener('click', beerInfo);
+    randomCard.addEventListener('click', beerInfo);
+
+    saveRandomBeer(randomBeerData);
+    }
 }
-/* Tar en till beerinfo*/
+
+
 function beerInfo(evt) {
-    
-    const id = evt.target.getAttribute('name');
+    const id = randomCard.getAttribute('name');
     const url = `beerinfo.html?name=${id}`;
     document.location.href = url;
 }
-/* Search button*/
+
+
 searchBtn.addEventListener('click', onSearchClicked);
+
 
 function onSearchClicked() {
     
