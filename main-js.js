@@ -42,9 +42,9 @@ function getData(url, callback) {
 
     fetch(url)
     .then(response => response.json())
-    .then(beerData => {
+    .then(data => {
        
-        callback(beerData);
+        callback(data);
     })
     .catch(error => console.log(error));
 }
@@ -63,7 +63,7 @@ function onClick(evt) {
     evt.preventDefault(); 
 }
 
-function getRandomBeer(randomBeerData){       //Skapar upp bild och namn på ranombeer
+function getRandomBeer(randomBeerData){     
     if (randomBeerData.length > 0){
     const beer = randomBeerData[0]
     

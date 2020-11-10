@@ -12,23 +12,23 @@ function getData(url, callback) {
     
     fetch(url)
     .then(res => res.json())
-    .then(beerData => {
+    .then(data => {
         
-        callback(beerData);
+        callback(data);
     })
     .catch(error => console.log(error));
 }
 
 
-function render(beerData) {
-    const beer = beerData[0];
+function render(data) {
+    const beer = data[0];
 
     //removeAllChildNodes(beerInfoDiv);
     
     let description = [
         `${beer.description}`,
         `Volume: ${beer.volume.value} ${beer.volume.unit}`,
-        `Alcohol by volume: ${beer.abv}`,
+        `Alcohol by volume: ${beer.abv}%`,
         `Food pairing: ${beer.food_pairing}`,
         `Brewers tips: ${beer.brewers_tips}`
     ];
@@ -70,6 +70,7 @@ function render(beerData) {
     yeastText = `<dt> Yeast: </dt> <dd>${beer.ingredients.yeast}</dd>`;
     
     const descriptionDiv = document.createElement('div');
+    descriptionDiv.classList.add('description-div');
     const ingredientsDiv = document.createElement('div');
     const maltP = document.createElement('p');
     const hopsP = document.createElement('p');

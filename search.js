@@ -14,8 +14,8 @@ let beersCash = {};
 sessionStorage.setItem("origin", window.location.href);
 
 
-function saveBeerList(beerData) {
-  beersCash['page' + currentPage] = beerData;
+function saveBeerList(data) {
+  beersCash['page' + currentPage] = data;
   window.sessionStorage.beersCash = JSON.stringify(beersCash);
 }
 
@@ -135,9 +135,9 @@ function getData(callback) {
   console.log(url);
   fetch(url, {cache: "force-cache"})
     .then(res => res.json())
-    .then(beerData => {
-      beers = beerData;
-      saveBeerList(beerData); 
+    .then(data => {
+      beers = data;
+      saveBeerList(data); 
       callback(beers);
     })
     .catch(error => console.log(error));

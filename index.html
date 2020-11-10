@@ -4,23 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet">
     <script src="main-js.js" defer></script>
-    <title>Document</title>
+    <title>Beer Project</title>
 </head>
 <body>
     <main>
-        <div class="random-card"></div>
+        <h1 class="beer-heading">Find Your Beer</h1>
 
         <div class="buttons">
-            <button class="random-btn">
-                <img class="dices" src="/img/dices.png" width="200em" alt="dices">
+            <button class="random-btn tooltip">
+                <img class="dices" src="/img/dices.png" width="150em" alt="dices">
+                <span class="tooltip-text">Get your random beer</span>
             </button>
 
-            <button class="search-btn">
-                <img class="search-glass" src="/img/search.png" width="150em" alt="search-glass">
+            <button class="search-btn tooltip">
+                <img class="search-glass" src="/img/magnifying-glass.png" width="150em" alt="search-glass">
+                <span class="tooltip-text">Search for beer</span>
             </button>
 
         </div>   
+
+        <div class="random-card"></div>
 
     </main>
 </body>
