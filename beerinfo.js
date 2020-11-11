@@ -23,14 +23,13 @@ function getData(url, callback) {
 function render(data) {
     const beer = data[0];
 
-    //removeAllChildNodes(beerInfoDiv);
     
     let description = [
-        `${beer.description}<br><br>`,
-        `Volume: ${beer.volume.value} ${beer.volume.unit}<br><br>`,
-        `Alcohol by volume: ${beer.abv}%<br><br>`,
-        `Food pairing: ${beer.food_pairing}`,
-        `Brewers tips: ${beer.brewers_tips}`
+        `<dd>${beer.description}<dd><br><br>`,
+        `<dt> Volume: </dt> <dd>${beer.volume.value} ${beer.volume.unit}</dd> <br>`,
+        `<dt> Alcohol by volume: </dt> <dd> ${beer.abv}% </dd> <br>`,
+        `<dt> Food pairing: </dt> <dd> ${beer.food_pairing} </dd> <br>`,
+        `<dt> Brewers tips: </dt> <dd> ${beer.brewers_tips} <dd> <br>`
     ];
 
 
@@ -45,7 +44,7 @@ function render(data) {
 
     let malt = beer.ingredients.malt;
 
-    maltText = '<dt> Malt:';
+    maltText = '<dt> Ingredients: </dt> <br> <dt> Malt:';
 
     for (let i = 0; i < malt.length; i++){
         let maltInfo = malt[i];
@@ -86,7 +85,6 @@ function render(data) {
     mainElement.appendChild(h2Tag);
     mainElement.appendChild(descriptionDiv);
     descriptionDiv.innerHTML = text;
-    ingredientsDiv.innerText = 'Ingredients:';
     descriptionDiv.appendChild(ingredientsDiv);
     maltP.innerHTML = maltText;
     ingredientsDiv.appendChild(maltP);
@@ -96,6 +94,7 @@ function render(data) {
     ingredientsDiv.appendChild(yeastP);
     const backButton = document.createElement('button');
     backButton.textContent = "Go Back";
+    backButton.classList.add('back-btn')
     mainElement.appendChild(backButton);
 
     backButton.addEventListener('click', goBack)
