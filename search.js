@@ -158,6 +158,10 @@ function render(beers) {
     beerList.innerText = 'No beers found...';
     nextBtn.classList.add('hidden');
   }
+
+  if (beers.length < 10){
+    nextBtn.classList.add('hidden');
+  }
   
   beerList.appendChild(ulElement);
 }
