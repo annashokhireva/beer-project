@@ -27,13 +27,17 @@
                     <input type="text" name="hops" placeholder="e.g. Cascade"><br>
                     <label for="malt">Malt</label><br>
                     <input type="text" name="malt" placeholder="e.g. Extra Pale"><br>
-                <div class="test">  
-                    <label for="brewed_before">Brewed after</label><br>
-                    <input type="text" name="brewed_after" placeholder="MM-YYYY" pattern="^(0[1-9]|1[012])[- /.](19|20)\d\d$"><br>
-                    <label for="brewed_after">Brewed before</label><br>
-                    <input type="text" name="brewed_before" placeholder="MM-YYYY" pattern="^(0[1-9]|1[012])[- /.](19|20)\d\d$"><br>
-                </div>  
+
+                    <div class="date-range">
+                        <label for="brewed_before">Brewed after</label><br>
+                        <input type="text" name="brewed_after" placeholder="MM-YYYY"
+                            pattern="^(0[1-9]|1[012])[- /.](19|20)\d\d$"><br>
+                        <label for="brewed_after">Brewed before</label><br>
+                        <input type="text" name="brewed_before" placeholder="MM-YYYY"
+                            pattern="^(0[1-9]|1[012])[- /.](19|20)\d\d$"><br>
+                    </div>
                 </div>
+
                 <div class="abv-slider">
                     <span> ABV from
                         <input type="number" name="abv_gt" value="0" min="0" max="67" pattern="[0-67]"> to
@@ -42,6 +46,7 @@
                     <input value="1" min="0" max="67" step="1" type="range">
                     <input value="67" min="0" max="67" step="1" type="range">
                 </div>
+
                 <button type="submit" class="btn-submit">SEARCH</button>
             </form>
         </aside>

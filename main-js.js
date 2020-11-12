@@ -4,8 +4,8 @@ const randomBtn = document.querySelector('button.random-btn');
 const searchBtn = document.querySelector('button.search-btn');
 const api = 'https://api.punkapi.com/v2/beers';
 
-
 let randomBeer = [];
+
 
 if(window.sessionStorage.randomBeer) {
     randomBeer = JSON.parse(window.sessionStorage.randomBeer);
@@ -15,9 +15,11 @@ function saveRandomBeer(randomBeerData) {
 window.sessionStorage.randomBeer = JSON.stringify(randomBeerData);
 }
 
+
 window.onbeforeunload = function(){
     sessionStorage.setItem("origin", window.location.href);
 }
+
 
 window.onload = function(){
     if(window.location.href === sessionStorage.getItem("origin")){
@@ -37,6 +39,7 @@ function removeAllChildNodes(parent) {
         parent.removeChild(parent.firstChild);
     }
 }
+
 
 function getData(url, callback) {
 
@@ -62,6 +65,7 @@ function onClick(evt) {
     getData(url, getRandomBeer); 
     evt.preventDefault(); 
 }
+
 
 function getRandomBeer(randomBeerData){     
     if (randomBeerData.length > 0){
@@ -100,4 +104,3 @@ function onSearchClicked() {
     const url = 'search.html';
     document.location.href = url;
 }
-

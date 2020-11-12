@@ -22,6 +22,7 @@ function saveBeerList(data) {
 formElement.addEventListener('submit', function (e) {
   e.preventDefault();
   removeAllChildNodes(beerList);
+  currentPage = 1;
   getData(render);
   nextBtn.classList.remove('hidden');
   window.sessionStorage.removeItem('beersCash');
@@ -209,7 +210,7 @@ abvRanger();
 
 function whenBrewed() {
 
-  let parent = document.querySelector(".test");
+  let parent = document.querySelector(".date-range");
   if (!parent) return;
 
   let dateInputs = parent.querySelectorAll("input[type=text]");
