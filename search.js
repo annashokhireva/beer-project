@@ -70,8 +70,8 @@ nextBtn.addEventListener('click', function () {
 
       beersCash = JSON.parse(beersCash);
       removeAllChildNodes(beerList);
-      if (beersCash['page' + currentPage]) {
 
+      if (beersCash['page' + currentPage]) {
         render(beersCash['page' + currentPage]);
       }
 
@@ -88,6 +88,13 @@ nextBtn.addEventListener('click', function () {
       prevBtn.classList.remove('hidden');
       nextBtn.classList.remove('hidden');
     }
+  }
+
+  else if (beersCash['page' + currentPage].length >= 10){
+    currentPage++;
+    removeAllChildNodes(beerList);
+    render(beersCash['page' + currentPage]);
+    nextBtn.classList.add('hidden');
   }
 });
 
