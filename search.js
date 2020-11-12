@@ -223,13 +223,13 @@ function whenBrewed() {
             brewedBeforeYear = parseInt(brewedBefore[1], 10);
 
           if (brewedAfterYear > brewedBeforeYear) {
-            dateInputs[0].setCustomValidity("Invalid field.");
-            dateInputs[1].setCustomValidity("Invalid field.");
+            dateInputs[0].setCustomValidity("Brewed After must be less than Brewed Before");
+            dateInputs[1].setCustomValidity("Brewed Before must be greater than Brewed After");
           }
 
-          else if (brewedAfterYear === brewedBeforeYear & brewedAfterMonth > brewedBeforeMonth) {
-            dateInputs[0].setCustomValidity("Invalid field.");
-            dateInputs[1].setCustomValidity("Invalid field.");
+          else if (brewedAfterYear === brewedBeforeYear & brewedAfterMonth >= brewedBeforeMonth) {
+            dateInputs[0].setCustomValidity("Brewed After must be less than Brewed Before");
+            dateInputs[1].setCustomValidity("Brewed Before must be greater than Brewed After");
           }
 
           else {
