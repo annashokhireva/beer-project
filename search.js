@@ -154,6 +154,11 @@ function render(beers) {
     ulElement.appendChild(liElement);
   }
 
+  if (beers.length < 1){
+    beerList.innerText = 'No beers found...';
+    nextBtn.classList.add('hidden');
+  }
+  
   beerList.appendChild(ulElement);
 }
 
