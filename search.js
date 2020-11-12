@@ -37,7 +37,6 @@ prevBtn.addEventListener('click', function () {
       let beersCash = window.sessionStorage.beersCash;
 
       beersCash = JSON.parse(beersCash);
-      console.log(beersCash);
 
       if (beersCash['page' + currentPage]) {
         removeAllChildNodes(beerList);
@@ -69,7 +68,6 @@ nextBtn.addEventListener('click', function () {
       let beersCash = window.sessionStorage.beersCash;
 
       beersCash = JSON.parse(beersCash);
-      console.log(beersCash);
       removeAllChildNodes(beerList);
       if (beersCash['page' + currentPage]) {
 
@@ -126,7 +124,6 @@ function getData(callback) {
   prevBtn.classList.add('hidden');
   nextBtn.classList.add('hidden');
   url = apiEndpoint + '?' + getQueryString(formElement);
-  console.log(url);
   fetch(url, { cache: "force-cache" })
     .then(res => res.json())
     .then(data => {
