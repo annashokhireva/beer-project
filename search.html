@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
     <script src="search.js" defer></script>
     <title>Beer Project</title>
@@ -28,10 +27,12 @@
                     <input type="text" name="hops" placeholder="e.g. Cascade"><br>
                     <label for="malt">Malt</label><br>
                     <input type="text" name="malt" placeholder="e.g. Extra Pale"><br>
+                <div class="test">  
                     <label for="brewed_before">Brewed after</label><br>
-                    <input type="text" name="brewed_after" placeholder="MM-YYYY" pattern="[0-9]{2}-[0-9]{4}"><br>
+                    <input type="text" name="brewed_after" placeholder="MM-YYYY" pattern="^(0[1-9]|1[012])[- /.](19|20)\d\d$"><br>
                     <label for="brewed_after">Brewed before</label><br>
-                    <input type="text" name="brewed_before" placeholder="MM-YYYY" pattern="[0-9]{2}-[0-9]{4}"><br>
+                    <input type="text" name="brewed_before" placeholder="MM-YYYY" pattern="^(0[1-9]|1[012])[- /.](19|20)\d\d$"><br>
+                </div>  
                 </div>
                 <div class="abv-slider">
                     <span> ABV from

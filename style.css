@@ -55,6 +55,7 @@ h2 {
     background: none;
     border: none;
     cursor: pointer;
+    outline: none;
 }
 
 .dices:hover {
